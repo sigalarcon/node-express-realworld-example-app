@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const registerUser = async (overrides: Record<string, unknown> = {}) => {
-  const unique = Date.now();
+  const unique = `${Date.now()}${Math.random().toString(36).substring(2, 8)}`;
   const userData = {
     username: `testuser${unique}`,
     email: `test${unique}@test.com`,
@@ -22,7 +22,7 @@ export const authHeader = (token: string) => ({
 });
 
 export const createTestArticle = async (token: string, overrides: Record<string, unknown> = {}) => {
-  const unique = Date.now();
+  const unique = `${Date.now()}${Math.random().toString(36).substring(2, 8)}`;
   const articleData = {
     title: `Test Article ${unique}`,
     description: 'Test description',

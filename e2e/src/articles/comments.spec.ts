@@ -37,7 +37,7 @@ describe('Comments API', () => {
   });
 
   it('should get comments for an article', async () => {
-    const res = await axios.get(`/api/articles/${articleSlug}/comments`);
+    const res = await axios.get(`/api/articles/${articleSlug}/comments`, authHeader(token));
 
     expect(res.status).toBe(200);
     expect(res.data).toHaveProperty('comments');

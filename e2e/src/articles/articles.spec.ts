@@ -14,7 +14,7 @@ describe('Articles API', () => {
 
   describe('POST /api/articles', () => {
     it('should create an article', async () => {
-      const unique = Date.now();
+      const unique = `${Date.now()}${Math.random().toString(36).substring(2, 8)}`;
       const res = await axios.post(
         '/api/articles',
         {
@@ -69,7 +69,7 @@ describe('Articles API', () => {
 
   describe('GET /api/articles', () => {
     it('should list articles', async () => {
-      const res = await axios.get('/api/articles');
+      const res = await axios.get('/api/articles', authHeader(token));
 
       expect(res.status).toBe(200);
       expect(res.data).toHaveProperty('articles');
@@ -79,14 +79,14 @@ describe('Articles API', () => {
     });
 
     it('should filter articles by tag', async () => {
-      const res = await axios.get('/api/articles?tag=test');
+      const res = await axios.get('/api/articles?tag=test', authHeader(token));
 
       expect(res.status).toBe(200);
       expect(res.data.articles.length).toBeGreaterThanOrEqual(1);
     });
 
     it('should filter articles by author', async () => {
-      const res = await axios.get(`/api/articles?author=${username}`);
+      const res = await axios.get(`/api/articles?author=${username}`, authHeader(token));
 
       expect(res.status).toBe(200);
     });

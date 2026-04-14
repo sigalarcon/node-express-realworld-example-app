@@ -4,7 +4,7 @@ import { authHeader, registerUser } from '../support/helpers';
 describe('Auth API', () => {
   describe('POST /api/users', () => {
     it('should register a new user', async () => {
-      const unique = Date.now();
+      const unique = `${Date.now()}${Math.random().toString(36).substring(2, 8)}`;
       const res = await axios.post('/api/users', {
         user: {
           username: `newuser${unique}`,
@@ -20,7 +20,7 @@ describe('Auth API', () => {
     });
 
     it('should return 422 when username is missing', async () => {
-      const unique = Date.now();
+      const unique = `${Date.now()}${Math.random().toString(36).substring(2, 8)}`;
       const res = await axios.post(
         '/api/users',
         {
@@ -41,7 +41,7 @@ describe('Auth API', () => {
         '/api/users',
         {
           user: {
-            username: `another${Date.now()}`,
+            username: `another${Date.now()}${Math.random().toString(36).substring(2, 8)}`,
             email: user.email,
             password: 'password123',
           },
